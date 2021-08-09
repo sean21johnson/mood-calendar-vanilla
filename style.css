@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Muli';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    margin-bottom: 0px;
+}
+
+section.moods {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    border: none;
+    background-color: white;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.subheader {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.laugh {
+    color: green;
+}
+
+.laugh.border {
+    color: white;
+    background-color: green;
+    border-radius: 50%;
+    padding-top: 4px;
+}
+
+.smile {
+    color: lightgreen;
+}
+
+.smile.border {
+    color: white;
+    background-color: lightgreen;
+    border-radius: 50%;
+    padding-top: 4px;
+}
+
+.meh {
+    color: rgb(211, 255, 144);
+}
+
+.meh.border {
+    color: white;
+    background-color: rgb(211, 255, 144);
+    border-radius: 50%;
+    padding-top: 4px;
+}
+
+.frown {
+    color: rgb(223, 170, 170)
+}
+
+.frown.border {
+    color: white;
+    background-color: rgb(223, 170, 170);
+    border-radius: 50%;
+    padding-top: 4px;
+}
+
+.sad {
+    color: red;
+}
+
+.sad.border {
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    padding-top: 4px;
+}
+
+h4 {
+    margin-bottom: 10px;
+}
+
+.circle_click_description {
+    margin-top: 6px;
+}
+
+.calendar_element {
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+table {
+    table-layout: fixed;
+    text-align: center;
+    width: 100%;
+}
+
+.table_container {
+    width: 300px;
+}
+
+td {
+    cursor: pointer;
+    color: white;
+    background-color: grey;
+    border-radius: 100%;
+}
+
+
+
+
+
+
+
+

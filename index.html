@@ -1,17 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Sean's Mood Calendar</title>
-</head>
-<body>
-    
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script
+			src="https://kit.fontawesome.com/25941e0ac3.js"
+			crossorigin="anonymous"
+		></script>
+		<link rel="stylesheet" href="style.css" />
+		<title>Sean's Mood Calendar</title>
+	</head>
+	<body>
+		<!--
+        Sections:
+            -Header section at the top
+            -Select mood section below
+            -Months / Days section below
+    -->
 
+		<header>
+			<h1>2019 Mood Calendar</h1>
+			<p class="subheader">
+				~ color each day depending on what your mood was / is ~
+			</p>
+		</header>
 
+		<section class="moods">
+			<h4>Select mood:</h4>
+			<div class="mood_choices">
+				<button class="moodBtn laugh" id="laugh">
+					<i class="far fa-laugh"></i>
+				</button>
+				<button class="moodBtn smile" id="smile">
+					<i class="far fa-smile"></i>
+				</button>
+				<button class="moodBtn meh" id="meh">
+					<i class="far fa-meh"></i>
+				</button>
+				<button class="moodBtn frown" id="frown">
+					<i class="far fa-frown"></i>
+				</button>
+				<button class="moodBtn sad" id="sad">
+					<i class="far fa-sad-tear"></i>
+				</button>
+			</div>
+			<p class="circle_click_description">then click on the circles below</p>
+		</section>
 
-    <script src="script.js"></script>
-</body>
+		<section class="calendar_element" id="calendar_element">
+			<!-- <thead>
+                <tr>
+                    <th>January</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="days">
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+
+                </tr>
+                <tr class="date">
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    
+                </tr>
+                <tr class="date">
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    
+                </tr> -->
+			<!-- </tbody> -->
+		</section>
+
+		<script src="script.js"></script>
+	</body>
 </html>
+
+<div class="table_container">
+<table>
+	<thead>
+		<tr>
+			<th class="month_header">January</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="days">
+			<th class="day_of_week">Sun</th>
+
+			<th class="day_of_week">Mon</th>
+
+			<th class="day_of_week">Tue</th>
+
+			<th class="day_of_week">Wed</th>
+
+			<th class="day_of_week">Thu</th>
+
+			<th class="day_of_week">Fri</th>
+
+			<th class="day_of_week">Sat</th>
+		</tr>
+		<tr class="date">
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+            <td>4</td>
+			<td>5</td>
+            <td>6</td>
+			<td>7</td>
+		</tr>
+        <tr class="date">
+			<td>8</td>
+			<td>9</td>
+			<td>10</td>
+            <td>11</td>
+			<td>12</td>
+            <td>13</td>
+			<td>14</td>
+		</tr>
+	</tbody>
+</table>
+</div>
