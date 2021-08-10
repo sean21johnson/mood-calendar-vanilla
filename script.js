@@ -31,61 +31,61 @@ const monthsData = [
 		startDay: "Tue",
 		dayCount: 31,
 	},
-	// {
-	// 	month: "February",
-	// 	startDay: "Fri",
-	// 	dayCount: 28,
-	// },
-	// {
-	// 	month: "March",
-	// 	startDay: "Fri",
-	// 	dayCount: 31,
-	// },
-	// {
-	// 	month: "April",
-	// 	startDay: "Mon",
-	// 	dayCount: 30,
-	// },
-	// {
-	// 	month: "May",
-	// 	startDay: "Wed",
-	// 	dayCount: 31,
-	// },
-	// {
-	// 	month: "June",
-	// 	startDay: "Sat",
-	// 	dayCount: 30,
-	// },
-	// {
-	// 	month: "July",
-	// 	startDay: "Mon",
-	// 	dayCount: 31,
-	// },
-	// {
-	// 	month: "August",
-	// 	startDay: "Thu",
-	// 	dayCount: 31,
-	// },
-	// {
-	// 	month: "September",
-	// 	startDay: "Sun",
-	// 	dayCount: 30,
-	// },
-	// {
-	// 	month: "October",
-	// 	startDay: "Tue",
-	// 	dayCount: 31,
-	// },
-	// {
-	// 	month: "November",
-	// 	startDay: "Fri",
-	// 	dayCount: 30,
-	// },
-	// {
-	// 	month: "December",
-	// 	startDay: "Sun",
-	// 	dayCount: 31,
-	// },
+	{
+		month: "February",
+		startDay: "Fri",
+		dayCount: 28,
+	},
+	{
+		month: "March",
+		startDay: "Fri",
+		dayCount: 31,
+	},
+	{
+		month: "April",
+		startDay: "Mon",
+		dayCount: 30,
+	},
+	{
+		month: "May",
+		startDay: "Wed",
+		dayCount: 31,
+	},
+	{
+		month: "June",
+		startDay: "Sat",
+		dayCount: 30,
+	},
+	{
+		month: "July",
+		startDay: "Mon",
+		dayCount: 31,
+	},
+	{
+		month: "August",
+		startDay: "Thu",
+		dayCount: 31,
+	},
+	{
+		month: "September",
+		startDay: "Sun",
+		dayCount: 30,
+	},
+	{
+		month: "October",
+		startDay: "Tue",
+		dayCount: 31,
+	},
+	{
+		month: "November",
+		startDay: "Fri",
+		dayCount: 30,
+	},
+	{
+		month: "December",
+		startDay: "Sun",
+		dayCount: 31,
+	},
 ];
 const daysInYear = monthsData.reduce(
 	(accumulator, currentValue) => accumulator + currentValue.dayCount,
@@ -105,239 +105,334 @@ function setSmileDisplay() {
 
 // EVENT LISTENERS
 function buildTables() {
-	let calendarHTML = "";
 
 	monthsData.forEach((month) => {
-		calendarHTML += `<div class="table_container"><table>
-            <thead>
-                <tr>
-                    <th class="month_header">${month.month}</th>
-                </tr>
-            </thead>
-            `;
+        
+        const newTableContainer = document.createElement("div");
+        newTableContainer.classList.add("table_container");
 
-		let dayNamesHTML = buildDayNames();
+        const newTable = document.createElement("table");
+        const newTHead = document.createElement("thead");
+        const newTr = document.createElement("tr");
+        const newTh = document.createElement("th");
 
-		calendarHTML += dayNamesHTML;
+        newTh.classList.add("month_header");
 
-		let dayNumbersHTML = buildDayNumbers(month.startDay, month.dayCount);
+        newTh.innerText = `${month.month}`
 
-        // console.log(dayNumbersHTML)
+        newTr.appendChild(newTh);
+        newTHead.appendChild(newTr);
+        newTable.appendChild(newTHead);
+        newTableContainer.appendChild(newTable);
 
-		calendarHTML += dayNumbersHTML;
 
-		calendarHTML += `</tbody></table></div>`;
+        calendarSection.appendChild(newTableContainer)
+
+        const dayNamesChildElement = buildDayNames();
+
+        console.log('dayNamesChildElement', dayNamesChildElement)
+
+        newTable.appendChild(dayNamesChildElement)
+
+        const individualDays = buildDayNumbers(month.startDay, month.dayCount);
+
+        newTable.appendChild(individualDays)
+
+
 	});
 
-	calendarSection.innerHTML = calendarHTML;
-
-	console.log(calendarSection.innerHTML);
 }
 
 function buildDayNumbers(monthStartDay, monthDayCount) {
 	let count = 0;
-	let dayCountHTML = document.createElement("tbody");
-	let introSubHTML = `<tr class="date">`;
-	let closeSubHTML = `</tr>`;
+
+    const newTr = document.createElement("tr");
+    newTr.classList.add("date");
+
 
 	while (count < monthDayCount) {
 		if (monthStartDay === "Sun" && count === 0) {
-			let newTr = document.createElement("tr");
 			let newDay = document.createElement("td");
 			newDay.innerText = count + 1;
-			newTr.appendChild(newDay);
 
-			newDay.addEventListener("click", () => {
-				console.log("clicked");
-			});
+            let newCount = 0;
 
-			dayCountHTML.appendChild(newTr);
-			count++;
+            while (newCount < 7) {
+                let newDay = document.createElement("td");
+
+                newDay.innerText = newCount + 1;
+
+                newTr.appendChild(newDay);
+
+                newDay.addEventListener("click", () => {
+                    console.log('clicked')
+                })
+
+                newCount++
+            }
+
+			count += 7;
+
 		} else if (monthStartDay === "Mon" && count === 0) {
-			let newTr = document.createElement("tr");
 
 			let emptyDay1 = document.createElement("td");
+            emptyDay1.classList.add("blank")
 			emptyDay1.innerText = "";
 
 			let newDay = document.createElement("td");
 			newDay.innerText = count + 1;
 
 			newTr.appendChild(emptyDay1);
-			newTr.appendChild(newDay);
 
-			newDay.addEventListener("click", () => {
-				console.log("clicked");
-			});
 
-			dayCountHTML.appendChild(newTr);
-			count++;
+            let newCount = 0;
+
+            while (newCount < 6) {
+                let newDay = document.createElement("td");
+
+                newDay.innerText = newCount + 1;
+
+                newTr.appendChild(newDay);
+
+                newDay.addEventListener("click", () => {
+                    console.log('clicked')
+                })
+
+                newCount++
+            }
+
+			count += 6;
+
+
+
 		} else if (monthStartDay === "Tue" && count === 0) {
-			let newTr = document.createElement("tr");
-            newTr.classList.add("date")
+			console.log("Tuesday hit");
+
 
 			let emptyDay1 = document.createElement("td");
+            emptyDay1.classList.add("blank")
 			emptyDay1.innerText = "";
 			let emptyDay2 = document.createElement("td");
+            emptyDay2.classList.add("blank")
 			emptyDay2.innerText = "";
 
-			let newDay = document.createElement("td");
-			newDay.innerText = count + 1;
-
-			newTr.appendChild(emptyDay1);
+            newTr.appendChild(emptyDay1);
 			newTr.appendChild(emptyDay2);
-			newTr.appendChild(newDay);
 
-			// newDay.addEventListener("click", () => {
-			// 	console.log("clicked");
-			// });
 
-            console.log(newDay)
+            let newCount = 0;
 
-            newDay.addEventListener("click", handleClick)
+            while (newCount < 5) {
+                let newDay = document.createElement("td");
 
-			dayCountHTML.appendChild(newTr);
-			count++;
+                newDay.innerText = newCount + 1;
+
+                newTr.appendChild(newDay);
+
+                newDay.addEventListener("click", () => {
+                    console.log('clicked')
+                })
+
+                newCount++
+            }
+
+			count += 5;
 		} else if (monthStartDay === "Wed" && count === 0) {
-			let newTr = document.createElement("tr");
 
 			let emptyDay1 = document.createElement("td");
+            emptyDay1.classList.add("blank")
 			emptyDay1.innerText = "";
 			let emptyDay2 = document.createElement("td");
+            emptyDay2.classList.add("blank")
 			emptyDay2.innerText = "";
 			let emptyDay3 = document.createElement("td");
+            emptyDay3.classList.add("blank")
 			emptyDay3.innerText = "";
 
-			let newDay = document.createElement("td");
-			newDay.innerText = count + 1;
-
-			newTr.appendChild(emptyDay1);
+            newTr.appendChild(emptyDay1);
 			newTr.appendChild(emptyDay2);
-			newTr.appendChild(emptyDay3);
-			newTr.appendChild(newDay);
+            newTr.appendChild(emptyDay3);
 
-			newDay.addEventListener("click", () => {
-				console.log("clicked");
-			});
 
-			dayCountHTML.appendChild(newTr);
-			count++;
+            let newCount = 0;
+
+            while (newCount < 4) {
+                let newDay = document.createElement("td");
+
+                newDay.innerText = newCount + 1;
+
+                newTr.appendChild(newDay);
+
+                newDay.addEventListener("click", () => {
+                    console.log('clicked')
+                })
+
+                newCount++
+            }
+
+			count += 4;
 		} else if (monthStartDay === "Thu" && count === 0) {
-			let newTr = document.createElement("tr");
 
 			let emptyDay1 = document.createElement("td");
+            emptyDay1.classList.add("blank")
 			emptyDay1.innerText = "";
 			let emptyDay2 = document.createElement("td");
+            emptyDay2.classList.add("blank")
 			emptyDay2.innerText = "";
 			let emptyDay3 = document.createElement("td");
+            emptyDay3.classList.add("blank")
 			emptyDay3.innerText = "";
 			let emptyDay4 = document.createElement("td");
+            emptyDay4.classList.add("blank")
 			emptyDay4.innerText = "";
 
-			let newDay = document.createElement("td");
-			newDay.innerText = count + 1;
+            newTr.appendChild(emptyDay1);
+            newTr.appendChild(emptyDay2);
+            newTr.appendChild(emptyDay3);
+            newTr.appendChild(emptyDay4);
 
-			newTr.appendChild(emptyDay1);
-			newTr.appendChild(emptyDay2);
-			newTr.appendChild(emptyDay3);
-			newTr.appendChild(emptyDay4);
-			newTr.appendChild(newDay);
 
-			newDay.addEventListener("click", () => {
-				console.log("clicked");
-			});
+            let newCount = 0;
 
-			dayCountHTML.appendChild(newTr);
-			count++;
+            while (newCount < 3) {
+                let newDay = document.createElement("td");
+
+                newDay.innerText = newCount + 1;
+
+                newTr.appendChild(newDay);
+
+                newDay.addEventListener("click", () => {
+                    console.log('clicked')
+                })
+
+                newCount++
+            }
+
+			count += 3;
 		} else if (monthStartDay === "Fri" && count === 0) {
-			let newTr = document.createElement("tr");
 
 			let emptyDay1 = document.createElement("td");
+            emptyDay1.classList.add("blank")
 			emptyDay1.innerText = "";
 			let emptyDay2 = document.createElement("td");
+            emptyDay2.classList.add("blank")
 			emptyDay2.innerText = "";
 			let emptyDay3 = document.createElement("td");
+            emptyDay3.classList.add("blank")
 			emptyDay3.innerText = "";
 			let emptyDay4 = document.createElement("td");
+            emptyDay4.classList.add("blank")
 			emptyDay4.innerText = "";
 			let emptyDay5 = document.createElement("td");
+            emptyDay5.classList.add("blank")
 			emptyDay5.innerText = "";
 
-			let newDay = document.createElement("td");
-			newDay.innerText = count + 1;
+            newTr.appendChild(emptyDay1);
+            newTr.appendChild(emptyDay2);
+            newTr.appendChild(emptyDay3);
+            newTr.appendChild(emptyDay4);
+            newTr.appendChild(emptyDay5);
 
-			newTr.appendChild(emptyDay1);
-			newTr.appendChild(emptyDay2);
-			newTr.appendChild(emptyDay3);
-			newTr.appendChild(emptyDay4);
-			newTr.appendChild(emptyDay5);
-			newTr.appendChild(newDay);
 
-			newDay.addEventListener("click", () => {
-				console.log("clicked");
-			});
+            let newCount = 0;
 
-			dayCountHTML.appendChild(newTr);
-			count++;
-		}else if (monthStartDay === "Sat" && count === 0) {
-			let newTr = document.createElement("tr");
+            while (newCount < 2) {
+                let newDay = document.createElement("td");
+
+                newDay.innerText = newCount + 1;
+
+                newTr.appendChild(newDay);
+
+                newDay.addEventListener("click", () => {
+                    console.log('clicked')
+                })
+
+                newCount++
+            }
+
+			count += 2;
+		} else if (monthStartDay === "Sat" && count === 0) {
 
 			let emptyDay1 = document.createElement("td");
+            emptyDay1.classList.add("blank")
 			emptyDay1.innerText = "";
 			let emptyDay2 = document.createElement("td");
+            emptyDay2.classList.add("blank")
 			emptyDay2.innerText = "";
 			let emptyDay3 = document.createElement("td");
+            emptyDay3.classList.add("blank")
 			emptyDay3.innerText = "";
 			let emptyDay4 = document.createElement("td");
-			emptyDay4.innerText = "";
+            emptyDay4.classList.add("blank")
+            emptyDay4.innerText = "";
 			let emptyDay5 = document.createElement("td");
-			emptyDay5.innerText = "";
-            let emptyDay6 = document.createElement("td");
-			emptyDay6.innerText = "";
+            emptyDay5.classList.add("blank")
+            emptyDay5.innerText = "";
+			let emptyDay6 = document.createElement("td");
+            emptyDay6.classList.add("blank")
+            emptyDay6.innerText = "";
 
-			let newDay = document.createElement("button");
-			newDay.innerText = count + 1;
-
-			newTr.appendChild(emptyDay1);
-			newTr.appendChild(emptyDay2);
-			newTr.appendChild(emptyDay3);
-			newTr.appendChild(emptyDay4);
-			newTr.appendChild(emptyDay5);
+            newTr.appendChild(emptyDay1);
+            newTr.appendChild(emptyDay2);
+            newTr.appendChild(emptyDay3);
+            newTr.appendChild(emptyDay4);
+            newTr.appendChild(emptyDay5);
             newTr.appendChild(emptyDay6);
-			newTr.appendChild(newDay);
-
-			// newDay.addEventListener("click", () => {
-			// 	console.log("clicked");
-			// });
 
 
+            let newCount = 0;
 
-			dayCountHTML.appendChild(newTr);
-			count++;
-        }
+            while (newCount < 1) {
+                let newDay = document.createElement("td");
 
-        count++;
+                newDay.innerText = newCount + 1;
 
+                newTr.appendChild(newDay);
+
+                newDay.addEventListener("click", () => {
+                    console.log('clicked')
+                })
+
+                newCount++
+            }
+
+			count += 1;
+		}
+
+        const anotherTr = document.createElement("tr");
+
+        
 	}
 
-	return dayCountHTML.innerHTML;
+	return newTr;
 }
 
 function handleClick() {
-    console.log(2)
+	console.log("clicked");
 }
 
 // Loop through the days of the week and populate the HTML in a table
 function buildDayNames() {
-	let dayNameHTML = `<tbody><tr class="days">`;
 
-	daysOfWeek.map(
-		(day) =>
-			(dayNameHTML += `
-                <th class="day_of_week">${day}</th>
-    `)
-	);
+    const newTBody = document.createElement("tbody");
+    const newTr = document.createElement("tr");
+    newTr.classList.add("days")
+    newTBody.appendChild(newTr);
 
-	return dayNameHTML;
+
+    daysOfWeek.map(day => {
+        const newDay = document.createElement("th");
+        newDay.classList.add("day_of_week");
+        newDay.innerText = day;
+
+        newTr.appendChild(newDay);
+
+        newDay.addEventListener("click", () => {
+            console.log('clicked')
+        })
+    })
+
+	return newTBody;
 }
 
 // Listeners on the buttons to change the classes

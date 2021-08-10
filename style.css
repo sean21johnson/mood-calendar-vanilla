@@ -116,7 +116,8 @@ h4 {
 table {
     table-layout: fixed;
     text-align: center;
-    width: 100%;
+    width: 85%;
+    margin-top: 50px;
 }
 
 .table_container {
@@ -128,6 +129,10 @@ td {
     color: white;
     background-color: grey;
     border-radius: 100%;
+}
+
+.blank {
+    visibility: hidden;
 }
 
 
